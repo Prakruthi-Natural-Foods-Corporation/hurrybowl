@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HurryBowl — Coming Soon</title>
+<meta name="description" content="Plant-based Indian vegetarian quick-serve restaurant launching in Cary, NC. Healthy, bold flavors delivered fast.">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --saffron: #F4A11D;
+    --turmeric: #E07B00;
+    --leaf: #3A7D44;
+    --deep-leaf: #2C5F34;
+    --cream: #FDF6EC;
+    --charcoal: #1C1C1C;
+    --muted: #6B6358;
+    --white: #FFFFFF;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--charcoal);
+    overflow-x: hidden;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 48px;
+    background: rgba(28,28,28,0.88);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .nav-brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-weight: 900;
+    color: var(--white);
+    letter-spacing: -0.5px;
+    text-decoration: none;
+  }
+
+  .nav-brand em { color: var(--saffron); font-style: normal; }
+
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+  }
+
+  .nav-link {
+    font-size: 13px;
+    color: rgba(255,255,255,0.55);
+    text-decoration: none;
+    letter-spacing: 0.5px;
+    transition: color 0.2s;
+  }
+
+  .nav-link:hover { color: var(--saffron); }
+
+  .nav-cta {
+    background: var(--saffron);
+    color: var(--charcoal);
+    border: none;
+    padding: 10px 22px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .nav-cta:hover { background: #fbb940; }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    padding-top: 80px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-left {
+    background: var(--charcoal);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 60px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-left::after {
+    content: '';
+    position: absolute;
+    right: -60px;
+    top: 0;
+    width: 120px;
+    height: 100%;
+    background: var(--charcoal);
+    clip-path: polygon(0 0, 0% 100%, 100% 100%);
+    z-index: 1;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--saffron);
+    color: var(--charcoal);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 8px 16px;
+    border-radius: 2px;
+    margin-bottom: 36px;
+    width: fit-content;
+    animation: fadeSlideUp 0.8s ease both;
+  }
+
+  .badge-dot {
+    width: 7px; height: 7px;
+    background: var(--charcoal);
+    border-radius: 50%;
+    animation: pulse 1.5s ease infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.7); }
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(56px, 7vw, 96px);
+    font-weight: 900;
+    color: var(--white);
+    line-height: 0.95;
+    margin-bottom: 8px;
+    animation: fadeSlideUp 0.8s 0.15s ease both;
+  }
+
+  .hero-title span { color: var(--saffron); font-style: italic; }
+
+  .hero-sub {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(18px, 2.5vw, 26px);
+    font-weight: 400;
+    font-style: italic;
+    color: rgba(255,255,255,0.55);
+    margin-bottom: 48px;
+    animation: fadeSlideUp 0.8s 0.25s ease both;
+  }
+
+  .hero-desc {
+    font-size: 15px;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.7);
+    max-width: 380px;
+    margin-bottom: 48px;
+    animation: fadeSlideUp 0.8s 0.35s ease both;
+  }
+
+  .hero-desc strong { color: var(--saffron); font-weight: 500; }
+
+  .location-tag {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    color: rgba(255,255,255,0.5);
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    animation: fadeSlideUp 0.8s 0.45s ease both;
+  }
+
+  .location-row { display: flex; align-items: center; gap: 10px; }
+
+  .location-expand {
+    font-size: 12px;
+    color: var(--leaf);
+    margin-left: 24px;
+  }
+
+  /* ─── HERO RIGHT ─── */
+  .hero-right {
+    background: linear-gradient(160deg, #4A9955 0%, #2C5F34 50%, #1a3d20 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    padding: 60px 40px;
+  }
+
+  .hero-right::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C%2Fg%3E%3C/svg%3E");
+  }
+
+  .bowl-graphic {
+    position: relative;
+    width: 280px;
+    height: 280px;
+    margin-bottom: 40px;
+    animation: floatBowl 4s ease-in-out infinite, fadeSlideUp 1s 0.5s ease both;
+  }
+
+  @keyframes floatBowl {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-12px); }
+  }
+
+  .bowl-graphic svg {
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 20px 40px rgba(0,0,0,0.4));
+  }
+
+  .coming-soon-box {
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 16px;
+    padding: 32px 40px;
+    text-align: center;
+    animation: fadeSlideUp 1s 0.7s ease both;
+    max-width: 320px;
+    width: 100%;
+  }
+
+  .cs-label {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--saffron);
+    font-weight: 500;
+    margin-bottom: 12px;
+  }
+
+  .cs-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 8px;
+  }
+
+  .cs-sub {
+    font-size: 13px;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.6;
+    margin-bottom: 24px;
+  }
+
+  .notify-form {
+    display: flex;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.25);
+  }
+
+  .notify-input {
+    flex: 1;
+    background: rgba(255,255,255,0.1);
+    border: none;
+    padding: 12px 16px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    color: var(--white);
+    outline: none;
+    min-width: 0;
+  }
+
+  .notify-input::placeholder { color: rgba(255,255,255,0.4); }
+
+  .notify-btn {
+    background: var(--saffron);
+    border: none;
+    padding: 12px 20px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--charcoal);
+    cursor: pointer;
+    letter-spacing: 0.5px;
+    transition: background 0.2s;
+    white-space: nowrap;
+  }
+
+  .notify-btn:hover { background: #fbb940; }
+
+  /* ─── SECTIONS ─── */
+  .section { padding: 100px 80px; }
+
+  .section-label {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--leaf);
+    font-weight: 500;
+    margin-bottom: 20px;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 5vw, 56px);
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 16px;
+  }
+
+  .section-desc {
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.7;
+    max-width: 520px;
+    margin-bottom: 60px;
+  }
+
+  /* ─── PROMISES ─── */
+  .promises-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+  }
+
+  .promise-item { text-align: center; }
+
+  .promise-icon {
+    width: 64px; height: 64px;
+    background: linear-gradient(135deg, var(--saffron), var(--turmeric));
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    margin: 0 auto 20px;
+    box-shadow: 0 8px 24px rgba(244,161,29,0.3);
+  }
+
+  .promise-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+
+  .promise-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+  /* ─── MENU ─── */
+  .menu-section { background: var(--charcoal); color: var(--white); }
+  .menu-section .section-title { color: var(--white); }
+
+  .menu-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin-bottom: 40px;
+  }
+
+  .menu-card {
+    background: #252525;
+    padding: 36px 32px;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s;
+  }
+
+  .menu-card:hover { background: #2e2e2e; }
+
+  .menu-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--saffron);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+  }
+
+  .menu-card:hover::before { transform: scaleX(1); }
+
+  .menu-emoji { font-size: 36px; margin-bottom: 20px; display: block; }
+
+  .menu-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 10px;
+  }
+
+  .menu-desc { font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.6; }
+
+  .vegan-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: var(--leaf);
+    color: var(--white);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 2px;
+    margin-top: 14px;
+  }
+
+  /* ─── EXPANSION ─── */
+  .expansion-section {
+    background: linear-gradient(135deg, var(--leaf), var(--deep-leaf));
+    color: var(--white);
+    text-align: center;
+    padding: 80px 80px;
+  }
+
+  .expansion-section .section-title { color: var(--white); }
+  .expansion-section .section-label { color: var(--saffron); }
+
+  .states-track {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 40px;
+  }
+
+  .state-pill {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 40px;
+    padding: 10px 22px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.85);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .state-pill.launch {
+    background: var(--saffron);
+    border-color: var(--saffron);
+    color: var(--charcoal);
+    font-weight: 600;
+  }
+
+  .state-dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; opacity: 0.6; }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: #111;
+    padding: 40px 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .footer-brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 900;
+    color: var(--white);
+  }
+
+  .footer-brand span { color: var(--saffron); }
+
+  .footer-links { display: flex; gap: 32px; flex-wrap: wrap; }
+
+  .footer-links a {
+    font-size: 13px;
+    color: rgba(255,255,255,0.4);
+    text-decoration: none;
+    letter-spacing: 0.5px;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: var(--saffron); }
+
+  .footer-copy { font-size: 12px; color: rgba(255,255,255,0.25); }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeSlideUp {
+    from { opacity: 0; transform: translateY(28px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    nav { padding: 16px 24px; }
+    .nav-right .nav-link { display: none; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-left { padding: 60px 32px; }
+    .hero-left::after { display: none; }
+    .section { padding: 60px 32px; }
+    .promises-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+    .menu-grid { grid-template-columns: 1fr; }
+    .expansion-section { padding: 60px 32px; }
+    footer { flex-direction: column; padding: 40px 32px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-brand">Hurry<em>Bowl</em></a>
+  <div class="nav-right">
+    <a href="#menu" class="nav-link">Menu Preview</a>
+    <a href="#story" class="nav-link">Our Story</a>
+    <a href="#expand" class="nav-link">Locations</a>
+    <button class="nav-cta" onclick="document.getElementById('notify-input').focus()">Get Notified</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="badge"><span class="badge-dot"></span> Coming Soon · Cary, NC</div>
+    <h1 class="hero-title">Hurry<span>Bowl</span></h1>
+    <p class="hero-sub">Plant-based. Indian-rooted. Always fresh.</p>
+    <p class="hero-desc">
+      We're bringing the vibrant flavors of <strong>Indian vegetarian cuisine</strong> to your doorstep — fast, wholesome, and unapologetically bold. Whether you're vegan, vegetarian, or just hungry for something real, your bowl is almost ready.
+    </p>
+    <div class="location-tag">
+      <div class="location-row">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Launching in Cary, North Carolina
+      </div>
+      <div class="location-expand">→ Expanding nationwide</div>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="bowl-graphic">
+      <svg viewBox="0 0 280 280" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="140" cy="255" rx="90" ry="14" fill="rgba(0,0,0,0.3)"/>
+        <ellipse cx="140" cy="195" rx="110" ry="30" fill="#1a1a1a"/>
+        <path d="M 30 160 Q 30 240 140 240 Q 250 240 250 160 Z" fill="#2a2a2a"/>
+        <path d="M 40 155 Q 40 230 140 230 Q 240 230 240 155 Z" fill="#222"/>
+        <ellipse cx="140" cy="155" rx="100" ry="22" fill="#333"/>
+        <ellipse cx="140" cy="152" rx="100" ry="20" fill="#3a3a3a"/>
+        <ellipse cx="140" cy="148" rx="82" ry="14" fill="#f5e6c8"/>
+        <ellipse cx="128" cy="144" rx="38" ry="9" fill="#E07B00" opacity="0.9"/>
+        <ellipse cx="158" cy="140" rx="26" ry="7" fill="#3A7D44"/>
+        <ellipse cx="115" cy="136" rx="22" ry="6" fill="#c4860a"/>
+        <ellipse cx="160" cy="130" rx="16" ry="5" fill="#fff" opacity="0.9"/>
+        <ellipse cx="135" cy="128" rx="12" ry="4" fill="#2C5F34"/>
+        <circle cx="148" cy="126" r="3" fill="#F4A11D"/>
+        <circle cx="124" cy="130" r="2.5" fill="#F4A11D"/>
+        <circle cx="162" cy="124" r="2" fill="#3A7D44"/>
+        <path d="M 110 100 Q 115 85 110 70" stroke="rgba(255,255,255,0.25)" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <path d="M 140 95 Q 145 78 140 62" stroke="rgba(255,255,255,0.2)" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <path d="M 168 100 Q 173 83 168 68" stroke="rgba(255,255,255,0.15)" stroke-width="2" fill="none" stroke-linecap="round"/>
+      </svg>
+    </div>
+
+    <div class="coming-soon-box">
+      <div class="cs-label">Opening in 2025</div>
+      <div class="cs-title">Be First in Line</div>
+      <div class="cs-sub">Get early access, launch offers, and a sneak peek at our full menu.</div>
+      <div class="notify-form">
+        <input id="notify-input" class="notify-input" type="email" placeholder="your@email.com">
+        <button class="notify-btn" id="notify-btn">Notify Me</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROMISES -->
+<section id="story" class="section" style="background: var(--cream);">
+  <div class="section-label">Why HurryBowl</div>
+  <h2 class="section-title">Fast food, finally<br>done right.</h2>
+  <p class="section-desc">We believe eating well shouldn't cost you time, money, or your values. Every bowl is made fresh, packed with nutrition, and ready when you are.</p>
+  <div class="promises-grid">
+    <div class="promise-item">
+      <div class="promise-icon">🌱</div>
+      <div class="promise-title">100% Plant-Based</div>
+      <div class="promise-desc">Every item on our menu is vegetarian. Clearly labeled vegan options make choosing simple.</div>
+    </div>
+    <div class="promise-item">
+      <div class="promise-icon">🍛</div>
+      <div class="promise-title">Authentic Flavors</div>
+      <div class="promise-desc">Recipes rooted in Indian culinary tradition — spiced with care, never watered down.</div>
+    </div>
+    <div class="promise-item">
+      <div class="promise-icon">⚡</div>
+      <div class="promise-title">Quick-Serve Speed</div>
+      <div class="promise-desc">Ready in minutes. Delivery to your door. No compromises on quality or convenience.</div>
+    </div>
+    <div class="promise-item">
+      <div class="promise-icon">🚴</div>
+      <div class="promise-title">Delivery-First</div>
+      <div class="promise-desc">Built for modern lives — order online, track your bowl, and enjoy at home or the office.</div>
+    </div>
+  </div>
+</section>
+
+<!-- MENU PREVIEW -->
+<section id="menu" class="section menu-section">
+  <div class="section-label">Menu Preview</div>
+  <h2 class="section-title">A taste of<br>what's coming.</h2>
+  <p class="section-desc" style="color:rgba(255,255,255,0.5)">Our menu blends beloved Indian classics with modern bowl-format convenience. Each dish is crafted to travel well and taste even better.</p>
+
+  <div class="menu-grid">
+    <div class="menu-card">
+      <span class="menu-emoji">🍲</span>
+      <div class="menu-name">Dal Makhani Bowl</div>
+      <div class="menu-desc">Slow-cooked black lentils in a rich tomato base, served over fragrant basmati rice with pickled onions.</div>
+    </div>
+    <div class="menu-card">
+      <span class="menu-emoji">🥬</span>
+      <div class="menu-name">Palak Paneer Bowl</div>
+      <div class="menu-desc">Creamy spinach curry with hand-cut paneer, over jeera rice with mint chutney.</div>
+    </div>
+    <div class="menu-card">
+      <span class="menu-emoji">🧆</span>
+      <div class="menu-name">Chana Masala Bowl</div>
+      <div class="menu-desc">Bold chickpea curry with tomatoes, ginger, and warming spices. Served with whole wheat roti.
+        <div class="vegan-tag">🌿 Vegan</div>
+      </div>
+    </div>
+    <div class="menu-card">
+      <span class="menu-emoji">🥙</span>
+      <div class="menu-name">Masala Dosa Wrap</div>
+      <div class="menu-desc">Crispy dosa rolled with spiced potato filling, coconut chutney, and sambar on the side.
+        <div class="vegan-tag">🌿 Vegan</div>
+      </div>
+    </div>
+    <div class="menu-card">
+      <span class="menu-emoji">🥗</span>
+      <div class="menu-name">Sprouted Moong Salad Bowl</div>
+      <div class="menu-desc">Light, protein-rich sprouted moong, cucumber, pomegranate, and lemon-chaat dressing.
+        <div class="vegan-tag">🌿 Vegan</div>
+      </div>
+    </div>
+    <div class="menu-card">
+      <span class="menu-emoji">🍮</span>
+      <div class="menu-name">Biryani Bowl</div>
+      <div class="menu-desc">Aromatic saffron-infused vegetable biryani with caramelized onions and cooling raita.</div>
+    </div>
+  </div>
+
+  <p style="font-size:13px; color:rgba(255,255,255,0.3); text-align:center; margin-top:8px;">Full menu with nutritional details, allergens, and ordering available at launch.</p>
+</section>
+
+<!-- EXPANSION -->
+<section id="expand" class="expansion-section">
+  <div class="section-label">Our Journey</div>
+  <h2 class="section-title" style="margin-bottom:16px">Cary first.<br>Then everywhere.</h2>
+  <p style="font-size:15px; color:rgba(255,255,255,0.7); max-width:480px; margin:0 auto; line-height:1.7;">
+    We're rooting ourselves in Cary, NC — one of the fastest-growing, most vibrant communities in America. From here, we plan to bring HurryBowl to cities across the country.
+  </p>
+  <div class="states-track">
+    <div class="state-pill launch"><span class="state-dot"></span> Cary, NC — Launch City</div>
+    <div class="state-pill"><span class="state-dot"></span> Raleigh, NC</div>
+    <div class="state-pill"><span class="state-dot"></span> Charlotte, NC</div>
+    <div class="state-pill"><span class="state-dot"></span> Atlanta, GA</div>
+    <div class="state-pill"><span class="state-dot"></span> Dallas, TX</div>
+    <div class="state-pill"><span class="state-dot"></span> Chicago, IL</div>
+    <div class="state-pill"><span class="state-dot"></span> New Jersey</div>
+    <div class="state-pill"><span class="state-dot"></span> Bay Area, CA</div>
+    <div class="state-pill"><span class="state-dot"></span> + More</div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">Hurry<span>Bowl</span></div>
+  <div class="footer-links">
+    <a href="https://www.hurrybowl.com">www.hurrybowl.com</a>
+    <a href="#">Instagram</a>
+    <a href="mailto:hello@hurrybowl.com">Contact</a>
+    <a href="mailto:franchise@hurrybowl.com">Franchise Inquiry</a>
+  </div>
+  <div class="footer-copy">© 2025 HurryBowl LLC · Cary, NC</div>
+</footer>
+
+<script>
+  document.getElementById('notify-btn').addEventListener('click', function() {
+    const input = document.getElementById('notify-input');
+    if (input.value && input.value.includes('@')) {
+      this.textContent = '✓ You\'re in!';
+      this.style.background = '#3A7D44';
+      this.style.color = '#fff';
+      input.value = '';
+      input.placeholder = 'Thanks! We\'ll be in touch.';
+      input.disabled = true;
+      this.disabled = true;
+    } else {
+      input.style.outline = '2px solid #E07B00';
+      setTimeout(() => input.style.outline = 'none', 1500);
+    }
+  });
+
+  document.getElementById('notify-input').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') document.getElementById('notify-btn').click();
+  });
+</script>
+</body>
+</html>
